@@ -1,14 +1,31 @@
-import React from "react";
-import logo from "./logo.svg";
+import { useState, useEffect } from "react";
 import "./App.css";
-import { Route, Routes, Navigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import Router from "./components/Router";
+import { app } from "firebaseApp";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
+  const auth = getAuth(app);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
+    !!auth?.currentUser
+  );
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      }
+    });
+  }, [auth]);
+
   return (
     <>
-      <Router />
+      <ToastContainer />
+      <Router isAuthenticated={isAuthenticated} />
     </>
   );
 }

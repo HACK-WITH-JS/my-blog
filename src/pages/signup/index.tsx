@@ -1,3 +1,11 @@
+import Header from "components/Header";
+import SignupForm from "components/SignupForm";
+
 export default function SignupPage() {
-  return <h1>회원 가입</h1>;
+  return (
+    <>
+      <Header />
+      <SignupForm />
+    </>
+  );
 }
