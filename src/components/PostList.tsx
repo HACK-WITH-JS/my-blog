@@ -18,6 +18,14 @@ export interface PostProps {
   content: string;
   createAt: string;
   updateAt?: string;
+  comments?: CommentsInterface[];
+}
+
+export interface CommentsInterface {
+  content: string;
+  uid: string;
+  email: string;
+  createdAt: string;
 }
 
 export default function PostList({ hasNavigation = true }: PostListProps) {
